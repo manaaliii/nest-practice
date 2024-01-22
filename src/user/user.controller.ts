@@ -1,58 +1,58 @@
 import { Controller, Get, Post, Patch, Delete, Query, Param, Req } from "@nestjs/common"
 import { Request } from '@nestjs/common';
+import { UserService } from "./user.service";
 
 @Controller('user')
 export class UserController {
+    // dependency injection
+    constructor(private userService: UserService) {}
+
     @Get()
-    getHello() {
-        return {
-                    name: 'sakura',
-                    designation: 'doctor',
-                    class: 7
-                }
+    getUsers() {
+        return this.userService.get();
     }
 
-    // @Get('/good-bye')
-    // getGoodbye(): string {
-    //     return 'Goodbye World!';
-    // }
 
     @Get('/:userId')
-    getUserId(@Param() params: {userId : number}){
-        return params.userId;
+    getUser(@Param() param: {userId : number}){
+        return this.userService.show(param);
     }
 
+    @Patch('/:userId')
+    updateUser(@Param() params:{userId:number}, @Req() req: Request){
+       return this.userService.update(params, req)
+    }
+
+    @Delete('/:userId')
+    deleteUser(@Param() params: {userId: number}, @Req() req: Request) {
+        console.log(params)
+        return this.userService.delete(params, req)
+    }
+
+    @Post()
+    createUser(@Req() req:Request) {
+        return this.userService.create(req);
+    }
+
+    // @Get()
+    // getUserObj() {
+    //     return {
+    //         name: 'user',
+    //         class: 'first ',
+    //         song: 'again'
+    //     }
+    // } 
+
+
+    
     // @Get('/')
     // getUserDetails(@Query() query: {userId: number, name: string, age:number}) {
     //     console.log(query)
     //     return query;
     // }
       
-    @Patch('/update/:userId')
-    updateUser(@Param() params:{userId:number}, @Req() req: Request){
-        console.log(params)
-        console.log(req.body)
-        return params
-    }
-
-    @Delete('/delete/:userId')
-    deleteUser(@Param() params: {userId: number}) {
-        console.log(params)
-        return params.userId;
-    }
-
-    @Post()
-    getUser(@Req() req:Request) {
-        console.log(req.body)
-        return req.body;
-    }
-
-    @Get()
-    getUserObj() {
-        return {
-            name: 'user',
-            class: 'first ',
-            song: 'again'
-        }
-    } 
+    // @Get('/good-bye')
+    // getGoodbye(): string {
+    //     return 'Goodbye World!';
+    // }
 }
