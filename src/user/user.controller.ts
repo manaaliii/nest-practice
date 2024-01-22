@@ -12,7 +12,6 @@ export class UserController {
         return this.userService.get();
     }
 
-
     @Get('/:userId')
     getUser(@Param() param: {userId : number}){
         return this.userService.show(param);
