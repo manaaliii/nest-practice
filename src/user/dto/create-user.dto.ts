@@ -5,11 +5,14 @@ export class CreateUserDto{
     @Matches(/^[a-zA-Z]+$/, { message: 'Name should contain only alphabets' })
     name:string;
 
-    // @IsEmail()
-    // email:string;
+    @IsEmail()
+    email:string;
 
     @IsNumber()
     age:number;
+
+    @IsString()
+    password:string;
 
     // @IsString()
     // @Matches(/^[a-zA-Z]+$/, { message: 'Designation should contain only alphabets' })

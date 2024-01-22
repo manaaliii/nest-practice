@@ -21,6 +21,10 @@ export class UserService {
         return this.userRepository.findOne({where :{id}});
     }
 
+    findByEmail(email:string){
+        return this.userRepository.findOne({where :{email}});
+    }
+
     create(createUserDto: CreateUserDto){
         return this.userRepository.save(createUserDto);
     }

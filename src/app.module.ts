@@ -3,6 +3,7 @@ import { AppController } from "./app.controller";
 import { UserModule } from './user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from "./user/entity/user.entity";
+import { AuthModule } from './auth/auth.module';
 
 
 @Module({
@@ -18,7 +19,7 @@ import { User } from "./user/entity/user.entity";
             database: 'mydb',
             entities: [User],
             synchronize: true,
-          }),UserModule]
+          }),UserModule, AuthModule]
 })
 
 export class AppModule{};
