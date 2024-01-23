@@ -1,4 +1,3 @@
-import { InjectRepository } from "@nestjs/typeorm";
 import { Column, Entity, PrimaryGeneratedColumn, Repository } from "typeorm";
 
 @Entity()
